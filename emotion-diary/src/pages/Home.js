@@ -8,6 +8,7 @@ const Home = () => {
   //타이틀 바꾸기
   useEffect(() => {
     const titleElement = document.getElementsByTagName("title")[0];
+
     titleElement.innerHTML = `감정 일기장`;
   });
 
@@ -15,9 +16,18 @@ const Home = () => {
 
   const [data, setData] = useState([]);
   const [curDate, setCurDate] = useState(new Date());
+
   const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`;
 
   useEffect(() => {
+    fetch("http://localhost:8080/api/book", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+
     if (diaryList.length >= 1) {
       const firstDay = new Date(
         curDate.getFullYear(),
@@ -38,6 +48,7 @@ const Home = () => {
       setData(
         diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
       );
+      console.log(diaryList);
     }
   }, [diaryList, curDate]);
 

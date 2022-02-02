@@ -32,6 +32,7 @@ const ControlMenu = React.memo(({ value, onChange, optionList }) => {
 
 const DiaryList = ({ diaryList }) => {
   const navigate = useNavigate();
+
   const [sortType, setSortType] = useState("latest");
   const [filter, setFilter] = useState("all");
 
